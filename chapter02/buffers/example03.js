@@ -1,3 +1,5 @@
+'use strict';
+
 let buf1 = new Buffer('this is the way we build our buffer'); 
 let lnth = buf1.length;
 

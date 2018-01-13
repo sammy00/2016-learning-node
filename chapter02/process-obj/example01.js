@@ -1,10 +1,11 @@
 process.stdin.setEncoding('utf8');
+
 process.stdin.on('readable', () => {
-  var input = process.stdin.read();
+  let input = process.stdin.read();
   if (input !== null) {
     // echo the text 
     process.stdout.write(input);
-    var command = input.trim(); 
+    const command = input.trim(); 
     if (command == 'exit') {
       process.exit(0);
     }

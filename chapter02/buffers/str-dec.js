@@ -1,6 +1,6 @@
 "use strict";
 
-let StringDecoder = require('string_decoder').StringDecoder;
+const StringDecoder = require('string_decoder').StringDecoder;
 
 let decoder = new StringDecoder('utf8'); 
 

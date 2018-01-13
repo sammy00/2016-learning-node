@@ -1,5 +1,5 @@
-let buf1 = new Buffer('1 is number one');
-let buf2 = new Buffer('2 is number two');
+let buf1 = Buffer.from('1 is number one');
+let buf2 = Buffer.from('2 is number two');
 //let buf3 = new Buffer(buf1.length);
 
 //buf1.copy(buf3);
