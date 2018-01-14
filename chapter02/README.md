@@ -86,3 +86,64 @@ function/method | description
   - if the second buffer isn't large enough to hold all of the contents, you'll only get the portion of the bytes that fit  
 + `Buffer.compare()` returns a value indicating whether the compared buffer lexically comes before or after (demo as `buffers/buf-cmp.js`)  
 + `SlowBuffer` can be used to retain the buffer contents for a small buffer for a long period of time and should be used only if nothing else will work  
+
+## Node's Callback and Asynchronous Event Handling  
+### The Event Queue (Loop)  
++ two approaches to achieve asynchronous functionality  
+  - assign a thread to each time-consuming process  
+  - adopt an event-driven architecture  
+    + events gets added into a queue, or event loop. Any dependent functionality registers an interest in this event with the application, and when the event is pulled from the event loop and processed, the dependent functionality is invoked, with any event-related data passed to it  
+    + used by JS and Node  
++ Node has its own event loop, used to help facilitate server-based functionality, primarily input/output (I/O), including  
+  - file access  
+  - inspect information about processes  
+  - waiting for a web-based request from a user    
++ events are subscribed to using the `on()` function, which the HTTP server class inherits from the `EventEmitter` class (demo as èvents/example04.js`)   
+
+### Creating an Asynchronous Callback Function  
++ 4 key functionalities  
+  - Ensure the last argument is a **callback** function  
+  - Create a Node `Error` and return it as the first argument in the callback function if an error occurs  
+  - If no error occurs, invoke the callback function, set the error argument to `null`, and pass in any relevant data  
+  - The callback function must be called within `process.nextTick()` to ensure the process doesn't block   
+
+### `EventEmitter`  
++ The `EventEmitter` enables asynchronous event handling in Node  
++ `EventEmitter` does two essential tasks  
+  - attach an event handler to an event  
+  - emit the actual event  
++ The `EventEmitter.on()` event handler is invoked when a specific event is emitted (demo as `event/example06.js`)  
+```javascript
+em.on('some-event', callback(data) { ... });
+```
++ an event is triggered via the `EventEmitter.emit()` function, and the `EventEmitter.on()` function can be used to trap that event and process it (demo as `event/example07.js`)    
+
+> No Octal Literals in Strict Mode: must use the ES6-style literal starting with `0o`  
+
++ listen to the next event with `EventEmitter.once()`  
++ Warning occurs for more than 10 listeners for an event. Use `set MaxListeners`, passing in a number, to change the number of listeners. Use a value of zero (0) for an unlimited amount of listeners   
++ `EventEmitter.removeListener()` removes listeners   
+
+### The Node Event Loop and Timers  
++ `setTimeout()` takes a callback function as first parameter, the delay time (**in milliseconds**) as second parameter, and an optional list of arguments  
+  - setup as `events/timeout.js` 
+  - cancel as 
++ `setInterval()` runs the given callback repeatedly (demo as `events/interval.js`) until the application is cancelled, or the timer is cleared with `clearInterval()`  
++ If you call `unref()` on a timer, and it’s the only event in the event queue, the timer is cancelled and the program is allowed to terminate  
++ If you call `ref()` on the same timer object, this keeps the program going until the timer has processed  
++ The `setImmediate()` creates an event of  
+  - higher precedence over those created by `setTimeout()` and `setInterval()`   
+  - lower precedence over I/O events  
+
+and if you call it from within a callback function, then it's placed into the next event loop after the one in which it was invoked is finished  
+
+### Nested Callbacks and Exception Handling  
++ From synchronous sequential application pattern to an asynchronous implementation requires a couple of modifications (demo as `events/example09.js`,`events/example10.js`) 
+  - replace all func‐ tions with their asynchronous counterparts  
+  - **nested callbacks** ensures a proper sequence   
++ check completion by adding a counter that is incremented with each log message and then checked against the file array's length to print out the "all done" message   
++ test file type by `fs.stats` method to return an object representing the data from a Unix `stat` command (demo as `events/example11.js`)    
++ callbacks nested too deeply is called **callback spaghetti** and the even more colorful **pyramid of doom**    
++ ways to implement this series of method calls without having to depend on nested callbacks, by  
+  - Async module  
+  - ES6 promises  

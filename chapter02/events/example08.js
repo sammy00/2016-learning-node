@@ -1,4 +1,5 @@
-let fs = require('fs');
+// A sequential synchronous application  
+const fs = require('fs');
 
 try {
   let data = fs.readFileSync('./apples.txt','utf8'); 

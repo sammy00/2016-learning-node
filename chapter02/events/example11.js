@@ -1,3 +1,4 @@
+// Adding in a stats check of each directory object to make sure it's a file  
 const fs = require('fs');
 
 let writeStream = fs.createWriteStream('./log.txt',

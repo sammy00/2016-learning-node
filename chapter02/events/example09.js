@@ -1,3 +1,4 @@
+// Application from Example 2-8 converted into asynchronous nested callbacks  
 const fs = require('fs');
 
 fs.readFile('./apples.txt', 'utf8', (err,data)=>{
@@ -8,7 +9,7 @@ fs.readFile('./apples.txt', 'utf8', (err,data)=>{
 
     fs.writeFile('./oranges.txt', adjData, (err) => {
       if (err) {
-        console.error(err); 
+        console.error(err.stack); 
       }
     });
   }

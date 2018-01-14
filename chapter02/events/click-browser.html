@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Click Event</title>
+</head>
+
+<body>
+  <button id="clicker">click me</button>
+  <div id="someid"> </div>
+
+  <script>
+    document.getElementById("clicker").addEventListener("click",
+      (event) => {
+        document.getElementById("someid").innerHTML = "I been clicked!";
+      }, false);
+  </script>
+</body>
+
+</html>

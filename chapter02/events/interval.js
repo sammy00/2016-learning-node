@@ -1,10 +1,10 @@
-var interval = setInterval((name) => {
+let interval = setInterval((name) => {
   console.log('Hello ' + name);
-}, 3000, 'Shelley');
+}, 1000, 'Shelley');
 
 setTimeout((interval) => {
   clearInterval(interval);
   console.log('cleared timer');
-}, 30000, interval);
+}, 3001, interval);
 
 console.log('waiting on first interval...');

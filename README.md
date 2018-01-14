@@ -5,6 +5,4 @@ Repository to host apps developed during reading [<Learning Node, 2ed>](https://
 
 ## Progress  
 + [x] [Chapter01. The Node Environment](chapter01/README.md)    
-+ [ ] Chapter02. Node Building Blocks: Global Objects, Events, and Node’s Asynchronous Nature  
-  - [ ] demo-event-emitter-inherits.js  
-  - [ ] demo-event-emitter-listener-rm.js  
++ [x] Chapter02. Node Building Blocks: Global Objects, Events, and Node’s Asynchronous Nature  

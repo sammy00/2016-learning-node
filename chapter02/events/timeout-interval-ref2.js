@@ -1,8 +1,8 @@
-var interval = setInterval((name) => {
+let interval = setInterval((name) => {
   console.log('Hello ' + name);
 }, 1000, 'Shelley');
 
-var timer = setTimeout((interval) => {
+let timer = setTimeout((interval) => {
   clearInterval(interval);
   console.log('cleared timer');
 }, 10000, interval);

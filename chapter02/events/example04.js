@@ -1,8 +1,10 @@
+// Example 2-4. Basic web server with additional event highlighting  
+
 const http = require('http');
 let server = http.createServer();
 
-const HOST = '0.0.0.0';
-const PORT = 3000;
+const HOST = '127.0.0.1';
+const PORT = 8080;
 
 server.on('request', (request, response) => {
   console.log('request event');

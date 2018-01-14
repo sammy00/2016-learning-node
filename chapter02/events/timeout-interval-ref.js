@@ -1,4 +1,4 @@
-var timer = setTimeout((name) => {
+let timer = setTimeout((name) => {
   console.log('Hello ' + name);
 }, 30000, 'Shelley');
 
