@@ -14,3 +14,4 @@ Repository to host apps developed during reading [<Learning Node, 2ed>](https://
 + [x] [Chapter08. Child Processes](chapter08/README.md)  
 + [x] [Chapter09. Node and ES6](chapter09/README.md)  
 + [x] [Chapter10. Full-Stack Node Development](chapter10/README.md)  
++ [x] [Node in Development and Production](chapter11/README.md)  
