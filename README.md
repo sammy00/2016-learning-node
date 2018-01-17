@@ -9,3 +9,4 @@ Repository to host apps developed during reading [<Learning Node, 2ed>](https://
 + [x] [Chapter03. Basics of Node Modules and Node Package Manager (npm)](chapter03/README.md)  
 + [x] [Chapter04. Interactive Node with REPL and More on the Console](chapter04/README.md)  
 + [x] [Chapter05. Node and the Web](chapter05/README.md)  
++ [x] [Chapter06. Node and the Local System](chapter06/README.md)  
