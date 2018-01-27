@@ -3,7 +3,7 @@
 ## An Overview of the Node Module System  
 + Node's module system is patterned after the *CommonJS module system*   
 + Among the CommonJS module system requirements implemented with Node are  
-  - Support is included for a require function that takes the module identifier and returns the exported API  
+  - Support is included for a `require` function that takes the module identifier and returns the exported API  
   - The module name is a string of characters, and may include forward slashes (for identification of paths)  
   - The module must explicitly export that which is to be exposed outside the module  
   - Variables are private to the module.
@@ -40,7 +40,7 @@
 > In other words, Node wraps the modules (main or otherwise) in anonymous functions, only exposing what the module developer wants to expose  
 
 ## Sandboxing and the VM Module  
-+ avoid `eval()` at all costs, since executes your JavaScript in the same context as the rest of your application    
++ avoid `eval()` at all costs, since it executes your JavaScript in the same context as the rest of your application    
 + using the VM module to sandbox the script   
 + The only safe way to execute an arbitrary chunk of JavaScript is in a separate process  
 + 3 types of functions  
@@ -55,83 +55,52 @@
 
 (demo as `vm/runInNewCtx.js`)  
 
-## `Script.runInThisContext`  
+## `Script.runInThisContext([options])`  
 + have access to the global console (or other) object (demo as `vm/example01.js`)  
-+ one of the sandbox content function's options is `displayErrors`, set to `true` by default (demo as `vm/display-err.js`) 
-+ The `filename` option is used to specify a filename that shows up in stack traces when the script is run  
-+ Script supports the other two global options in the context function calls: `displayErrors` and `timeout`   
++ several options  
+
+option | description 
+------:|:-----------
+`displayErrors` | `true` by default (demo as `vm/display-err.js`), so that if an `Error` error occurs during compilation, the line of code causing the error is attached to the stack trace  
+`timeout` | specify the number of milliseconds to execute code before terminating execution which will raise an `Error`
+`filename`  | specify a filename that shows up in stack traces when the script is run  
+
 + script can be loaded from external files (demo as `vm/load-from-script.js`)  
 
-### `runInContext()`  
+### `vm.runInContext()`  
 + run the script in a contextualized sandbox before the function call
 
 > the difference between running the functions in Script and directly in VM is that the Script object precompiles the code, and you pass the filename in when you create the object rather than as one of the options to the function calls  
 
+demo as `vm/runInCtx.js`  
+
 ## An In-Depth Exploration of NPM  
 + Modules can be installed **globally** or **locally** (default)  
 + The local installation is the best approach for an isolated project and everyone sharing the same system doesn't need access to the module  
-+ A local installation installs the module in the current location in the `node_modules` directory by command  
-```bash
-npm install modulename
-``` 
-+ use the `-g` or `--global` option to install the package globally by command  
-```bash
-npm install -g modulename
-``` 
++ subcommands of `npm` go as  
+
+subcommand | description
+----------:|:-----------
+`install modulename`   |  install a local package
+`install -g/--global modulename`  | install a global package
+`install modulename@0.1`  | install the package of version 1.0 
+`uninstall modulename`    | remove the package named `modulename`
+`update`  | update all packages if any  
+`update modulename`   | update a specific package named `modulename`
+`install npm -g`  | update `npm` itself
+`outdated`  | check to see if any packages are outdated  
+`list/ls/la/ll` | list installed packages and dependencies    
+`-d`  | directly install all dependencies with the `-d` flag   
+`ls -g` | see modules installed globally
+`config list` | lists the npm configuration settings  
+`config list -l` | get a more in-depth look at all configuration settings with  
+`config delete keyname`/`config set keyname value`  | modify or remove configuration settings either by using a command line  
+`search modulename` | search for a package by name
+
 + module can be also installed from a folder on the filesystem, or a tarball that's either local or fetched via a URL   
-+ version (say, 0.1) of modules can be specified  
-```bash
-npm install modulename@0.1 
-```
-+ uninstall module by  
-```bash
-npm uninstall modulename
-```
-+ update all packages if any  
-```bash
-npm update
-```
-+ update a specific package  
-```bash
-npm update modulename
-```
-+ update `npm`  
-```bash
-npm install npm -g
-```
-+ check to see if any packages are outdated  
-```bash
-npm outdated
-```
-+ List installed packages and dependencies with `list`, `ls`, `la`, or `ll`    
-+ directly install all dependencies with the `-d` flag   
-+ To see which modules are installed globally, use  
-```bash
-npm ls -g
-```
-+ lists the npm configuration settings  
-```bash
-npm config list
-```
-+ get a more in-depth look at all configuration settings with  
-```bash
-npm config ls -l
-```
-+ modify or remove configuration settings either by using a command line  
-```bash
-npm config delete keyname 
-npm config set keyname value
-```
-+ search for a module  
-```bash
-npm search modulename
-```
 > If you're using npm and get a "registry error parsing json" error, you can use one of the npm mirrors to complete your task  
 + The npm documentation recommends you create a `package.json` file to maintain your local dependencies  
-+ To create a default `package.json` file in the project directory  
-```bash
-npm init --yes
-```
++ run `npm init --yes` to create a default `package.json` file in the project directory  
 + update the file to reflect the newly installed module  
 ```bash
 npm install modulename --save-dev
@@ -161,9 +130,9 @@ This saves the module name and version to the devDependencies field in the `pack
 
 filed | description 
 -----:|:-----------
-name  | The name of the package—required
+name  | The name of the package — required
 description   | The package description
-version   | The current version conforming to semantic version requirements—required
+version   | The current version conforming to semantic version requirements — required
 keywords  | An array of search terms
 maintainers   | An array of package maintainers (includes name, email, and website)
 contributors  | An array of package contributors (includes name, email, and website)
@@ -199,7 +168,7 @@ npm publish
 
 pattern | description 
 -------:|:-----------
-waterfall   | Functions are called in turn, and results of all are passed as an array to the last callback (also called series and sequence by others). (demo as `async/example{05,06,07}.js`)
+waterfall   | Functions are called in turn, and results of all are passed as an array to the last callback (also called series and sequence by others). (demo as `async/example{05,06,07}.js`, `example06.js` doesn't work) 
 series  | Functions are called in turn and, optionally, results are passed as an array to the last callback.
 parallel  | Functions are run in parallel and when completed, results are passed to the last callback (though the result array isn't part of the pattern in some interpretations of the parallel pattern).
 whilst  | Repeatedly calls one function, invoking the last callback only if a preliminary test returns false or an error occurs.
@@ -210,10 +179,10 @@ iterator  | Each function calls the next, with the ability to individually acces
 apply   | A continuation function with arguments already applied combined with other control flow functions.
 nextTick  | Calls the callback in the next loop of an event loop—based on process.next Tick in Node.
 
-> when you're working with the Async control flow methods, all you need is to pass a callback to each asynchronous task and to call this callback when you’re finished, passing in an error object (or null) and whatever data you need  
+> when you're working with the Async control flow methods, all you need is to pass a callback to each asynchronous task and to call this callback when you're finished, passing in an error object (or null) and whatever data you need  
 
 ### Command-Line Magic with `Commander`  
-+ chain option calls listing out all of the various options supported for the application (demo as `cmd/options.js`)   
++ chain option calls listing out all of the various options supported for the application (demo as `cmd/options1.js`)   
 + `Commander` supports  
   - concatenated short options  
   - multiwork option
@@ -224,3 +193,5 @@ nextTick  | Calls the callback in the next loop of an event loop—based on proc
 ### The Ubiquitous `Underscore`  
 + the problem with the `underscore` is that this character has a specific meaning in REPL, which can be solved by renaming  
 + **one nice capability**: a controlled way to extend Underscore with your own utility functions via the mixin function  
+
+demo as `underscore/app{01,02}.js`  

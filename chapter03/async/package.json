@@ -1,0 +1,16 @@
+{
+  "name": "async-examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "example05.js",
+  "dependencies": {
+    "async": "^2.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "sammy00",
+  "license": "MIT"
+}

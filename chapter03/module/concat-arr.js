@@ -1,2 +1,3 @@
-const newArray = require('./arrayfunctions.js');
+const newArray = require('./arrayfunctions');
+
 console.log(newArray.concatArray('hello', ['test1', 'test2']));

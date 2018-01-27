@@ -1,4 +1,4 @@
-// Opening three  les in parallel and reading in their contents
+// Opening three files in parallel and reading in their contents
 const fs = require('fs');
 const async = require('async');
 
