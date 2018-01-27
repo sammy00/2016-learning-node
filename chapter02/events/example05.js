@@ -1,4 +1,4 @@
-// Example 2-5.  e fundamental structure of the last callback functionality  
+// the fundamental structure of the last callback functionality  
 'use strict';
 
 let fib = (n) => {
@@ -8,12 +8,8 @@ let fib = (n) => {
 
 class Obj {
   doSomething(num, cb) {
-    let callback = ('function' === typeof (cb) ? cb : null);
+    let callback = ('function' === (typeof cb) ? cb : null);
     if ('number' !== typeof num) {
-      num = null;
-    }
-
-    if (!num) {
       return callback(new Error('first arg missing or not a number'));
     }
     process.nextTick(() => {
@@ -31,7 +27,7 @@ test.doSomething(number, (err, value) => {
   if (err) {
     console.error(err);
   } else {
-    console.log('fibonaci value for %d is %d', number, value);
+    console.log('Fibonacci value for %d is %d', number, value);
   }
 });
 

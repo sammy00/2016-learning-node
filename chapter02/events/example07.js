@@ -1,4 +1,4 @@
-// Example 2-7. Creating an event-based object that inherits from EventEmitter  
+// Creating an event-based object that inherits from EventEmitter  
 
 "use strict";
 
@@ -25,11 +25,9 @@ class InputChecker extends EventEmitter {
     // if wr, write input to file 
     if (command == 'wr:') {
       this.emit('write', input.substr(3, input.length));
-      // if en, end process
-    } else if (command == 'en:') {
+    } else if (command == 'en:') { // if en, end process
       this.emit('end');
-      // just echo back to standard output
-    } else {
+    } else { // otherwise, just echo back to standard output
       this.emit('echo', input);
     }
   }

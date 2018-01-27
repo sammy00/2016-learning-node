@@ -10,4 +10,3 @@ let timer = setTimeout((interval) => {
 timer.unref();
 
 console.log("waiting on timer...");
-

@@ -1,6 +1,6 @@
 let timer1 = setTimeout((name) => {
   console.log('Hello ' + name);
-}, 30000, 'Shelley');
+}, 30000, 'Sammy');
 
 console.log("waiting on timer...");
 

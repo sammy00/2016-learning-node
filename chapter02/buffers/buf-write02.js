@@ -6,3 +6,5 @@ buf[2] = 0x74;
 buf[3] = 0x73;
 
 console.log(buf.toString());
+// output
+// cats

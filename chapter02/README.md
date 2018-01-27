@@ -17,6 +17,7 @@ property | description
 `process.env`   | information about the development/production environment 
 `process.release` | the name of the application, as well as URLs for the source code  
 
+demo as `check-process.sh`  
 + several objects and functions essential for many applications, including    
   - access to the standard I/O  
   - the ability to gracefully end a Node application
@@ -77,13 +78,13 @@ function/method | description
 > `StringDecoder` class also serves to convert a buffer to a string (demo as `buffers/str-dec.js`)    
 
 ### Buffer Manipulation  
-+ signed and unsigned 8-, 16-, and 32-bit integers, as well as floats and doubles can be read from or written to `Buffer` (demo as `buffers/buf-write.js`)   
++ signed and unsigned 8-, 16-, and 32-bit integers, as well as floats and doubles can be read from or written to `Buffer` (demo as `buffers/buf-write01.js`)   
 + For all types other than the 8-bit integers, you can also pick whether you want **little-endian** or **big-endian** format  
-+ 8-bit integers can be written to `Buffer` directly using an array-like format (demo as `buffers/buf-write2.js`)  
++ 8-bit integers can be written to `Buffer` directly using an array-like format (demo as `buffers/buf-write02.js`)  
 + `buffer.slice()` can create a new buffer by taking a soft-copy section of the old (demo as `buffers/example03.js`)  
 + `Buffer.equals()` test whether buffers are equivalent (demo as `buffers/buf-eq.js`)   
 + `Buffer.copy()` copies bytes from one buffer to another (demo as `buffers/buf-copy.js`)  
-  - if the second buffer isn't large enough to hold all of the contents, you'll only get the portion of the bytes that fit  
+  - if the destination isn't large enough to hold all of the contents, only the portion of bytes that fit will be copied  
 + `Buffer.compare()` returns a value indicating whether the compared buffer lexically comes before or after (demo as `buffers/buf-cmp.js`)  
 + `SlowBuffer` can be used to retain the buffer contents for a small buffer for a long period of time and should be used only if nothing else will work  
 
@@ -92,13 +93,15 @@ function/method | description
 + two approaches to achieve asynchronous functionality  
   - assign a thread to each time-consuming process  
   - adopt an event-driven architecture  
-    + events gets added into a queue, or event loop. Any dependent functionality registers an interest in this event with the application, and when the event is pulled from the event loop and processed, the dependent functionality is invoked, with any event-related data passed to it  
+    + events gets added into a queue, or event loop  
+    + any dependent functionality registers an interest in events with the application  
+    + when the event is pulled from the event loop and processed, the dependent functionality is invoked, with any event-related data passed to it  
     + used by JS and Node  
-+ Node has its own event loop, used to help facilitate server-based functionality, primarily input/output (I/O), including  
++ Node has its own event loop, used to facilitate server-based functionality, primarily input/output (I/O), including  
   - file access  
   - inspect information about processes  
   - waiting for a web-based request from a user    
-+ events are subscribed to using the `on()` function, which the HTTP server class inherits from the `EventEmitter` class (demo as èvents/example04.js`)   
++ events are subscribed to using the `on()` function, which the HTTP server class inherits from the `EventEmitter` class (demo as `events/example04.js`)   
 
 ### Creating an Asynchronous Callback Function  
 + 4 key functionalities  
@@ -120,16 +123,16 @@ em.on('some-event', callback(data) { ... });
 
 > No Octal Literals in Strict Mode: must use the ES6-style literal starting with `0o`  
 
-+ listen to the next event with `EventEmitter.once()`  
-+ Warning occurs for more than 10 listeners for an event. Use `set MaxListeners`, passing in a number, to change the number of listeners. Use a value of zero (0) for an unlimited amount of listeners   
-+ `EventEmitter.removeListener()` removes listeners   
++ `EventEmitter.once(event-name,listener)` adds a one-time `listener` function for the event named `event-name`. The next time `event-name` is triggered, this `listener` is removed and then invoked   
++ Warning occurs for more than 10 listeners for an event. Use `setMaxListeners(n)`, passing in a number, to change the number of listeners, where `n==0` means an unlimited amount of listeners   
++ `EventEmitter.removeListener(event-name,listener)` removes listeners   
 
 ### The Node Event Loop and Timers  
-+ `setTimeout()` takes a callback function as first parameter, the delay time (**in milliseconds**) as second parameter, and an optional list of arguments  
-  - setup as `events/timeout.js` 
-  - cancel as 
-+ `setInterval()` runs the given callback repeatedly (demo as `events/interval.js`) until the application is cancelled, or the timer is cleared with `clearInterval()`  
-+ If you call `unref()` on a timer, and it’s the only event in the event queue, the timer is cancelled and the program is allowed to terminate  
++ `setTimeout()` takes a callback function as first parameter, the delay time (**in milliseconds**) as the second parameter, and an optional list of arguments  
+  - setup as `timer/timeout.js` 
+  - cancel as `timer/timeout-cancel.js`  
++ `setInterval()` runs the given callback repeatedly (demo as `timer/interval.js`) until the application is cancelled, or the timer is cleared with `clearInterval()`  
++ If you call `unref()` on a timer, and it's the only event in the event queue, the timer is cancelled and the program is allowed to terminate (demo as `timeout-unref{01,02}.js`)  
 + If you call `ref()` on the same timer object, this keeps the program going until the timer has processed  
 + The `setImmediate()` creates an event of  
   - higher precedence over those created by `setTimeout()` and `setInterval()`   
@@ -138,11 +141,11 @@ em.on('some-event', callback(data) { ... });
 and if you call it from within a callback function, then it's placed into the next event loop after the one in which it was invoked is finished  
 
 ### Nested Callbacks and Exception Handling  
-+ From synchronous sequential application pattern to an asynchronous implementation requires a couple of modifications (demo as `events/example09.js`,`events/example10.js`) 
-  - replace all func‐ tions with their asynchronous counterparts  
++ From synchronous sequential application pattern to an asynchronous implementation requires a couple of modifications (demo as `nested-callback/example{09,10}.js`) 
+  - replace all functions with their asynchronous counterparts  
   - **nested callbacks** ensures a proper sequence   
 + check completion by adding a counter that is incremented with each log message and then checked against the file array's length to print out the "all done" message   
-+ test file type by `fs.stats` method to return an object representing the data from a Unix `stat` command (demo as `events/example11.js`)    
++ test file type by `fs.stats` method to return an object representing the data from a Unix `stat` command (demo as `nested-callback/example11.js`)    
 + callbacks nested too deeply is called **callback spaghetti** and the even more colorful **pyramid of doom**    
 + ways to implement this series of method calls without having to depend on nested callbacks, by  
   - Async module  
