@@ -2,13 +2,13 @@
 
 REPL is short for *read-eval-print loop* 
 
-Whatever you type into REPL is, for the most part, processed no differently than if you had typed the JavaScript into a file and run the file using Node  
+Whatever you type into REPL, for the most part, is processed no differently than if you had typed the JavaScript into a file and run the file using Node  
 
-## REPL: First Looks and Unde ned Expressions  
+## REPL: First Looks and Undefined Expressions  
 + start by invoke `node` without any options  
-+ To access the last expression, use the underscore/underline special variable (`_`)   
++ to access the last expression, use the underscore/underline special variable (`_`)   
 
-## Bene ts of REPL: Getting a Closer Understanding of JavaScript Under the Hood  
+## Benefits of REPL: Getting a Closer Understanding of JavaScript Under the Hood  
 Testing codes in REPL to check for unexpected side effects in our applications  
 
 ## Multiline and More Complex JavaScript  
@@ -24,15 +24,15 @@ Ctrl-D  | Exits REPL.
 Tab   | Autocompletes global or local variable.
 Up arrow  | Traverses up through command history.
 Down arrow  | Traverses down through command history. 
-Underscore (_)  | References result of last expression. 
+Underscore (`_`)  | References result of last expression. 
 
-> save the results of the current con‐ text with the .save command  
+> save the results of the current context with the `.save` command  
 
 ### REPL Commands  
 
 command | description
 -------:|:-----------
-`.break`  | If you get lost during a multiline entry, typing .break will start you over again. You’ll lose the multiline content, though.
+`.break`  | If you get lost during a multiline entry, typing `.break` will start you over again. You’ll lose the multiline content, though.
 `.clear`  | Resets the context object and clears any multiline expression. This command basically starts you over again.
 `.exit`   | Exits REPL.
 `.help`   | Displays all available REPL commands.
@@ -53,16 +53,16 @@ where some options are
 
 option | description
 ------:|:-----------
-prompt  | Default is >.
-input   | Readable stream; default is process.stdin.
-output  | writable stream; default is process.stdout.
-eval    | Default is an async wrapper for eval.
-useGlobal   | Default is false to start a new context rather than use the global object.
-useColors   | Whether writer function should use colors. Defaults to REPL's terminal value.
-ignoreUndefined   | Default is false: don’t ignore the undefined responses.
-terminal  | Set to true if stream should be treated like a tty (terminal), including support for ANSI/VT100 escape codes.
-writer  | Function to evaluate each command, and return formatting. Defaults to util.inspect.
-replMode  | Whether REPL runs in strict mode, default, or hybrid.
+`prompt`  | Default is `>`
+`input`   | Readable stream; default is `process.stdin`
+`output`  | writable stream; default is `process.stdout`
+`eval`    | Default is an async wrapper for `eval`
+`useGlobal`   | Default as `false` starts a new context rather than using the global object
+`useColors`   | Whether writer function should use colors. Defaults to REPL's terminal value
+`ignoreUndefined`   | Default is `false`: don't ignore the undefined responses
+`terminal`  | Set to `true` if stream should be treated like a tty (terminal), including support for ANSI/VT100 escape codes
+`writer`  | Function to evaluate each command, and return formatting. Defaults to `util.inspect`.
+`replMode`  | Whether REPL runs in `strict mode`, `default`, or `hybrid`
 
 + the `eval` function can be customized. The only requirement is that it has a specific format:   
 ```javascript
@@ -120,13 +120,13 @@ option  | description
 `showHidden`  | to display non-enumerable or symbolic properties (default is `false`) 
 `depth`   | how many times to recurse to inspect object (default is 2)
 `colors`  | if true, output is styled with ANSI color codes (default is `false`)
-`customInspect` | if `false`, then custom inspect functions defined on the objects being inspected won't be called (default is true)
+`customInspect` | if `false`, then custom inspect functions defined on the objects being inspected won't be called (default is `true`)
 
 (demo as `util/example02.js`)  
 
 ### Providing Richer Feedback with console and a Timer  
 + motivation: add a timer and output a begin and end time  
-+ implementation: `console.time()` and `console.timeEnd()`, passing a timer name to both  
++ implementation: `console.time()` and `console.timeEnd()`, passing a timer name to both (demo as `console-timer.js`,`timing-server.js`)  
 
 
 

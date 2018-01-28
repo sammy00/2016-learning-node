@@ -7,6 +7,7 @@ repl.start({
   input: process.stdin,
   output: process.stdout
 });
+
 net.createServer(function (socket) {
   connections += 1;
   repl.start({
@@ -17,6 +18,7 @@ net.createServer(function (socket) {
     socket.end();
   })
 }).listen("/tmp/node-repl-sock");
+
 net.createServer(function (socket) {
   connections += 1;
   repl.start({
