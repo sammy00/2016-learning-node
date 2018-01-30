@@ -2,7 +2,7 @@
 
 ## Exploring the Operating System  
 + Accessing information directly about the operating system comes to us via the `os` core module  
-+ The `os` module's functionality is informative only (demo as `os/app.js`)   
++ The `os` module's functionality is informative/read only (demo as `os/app.js`)   
 
 > The temporary folder is where files are temporarily stored. The contents are deleted when the system is restarted, or at other intervals.  
 
@@ -34,7 +34,7 @@ function | description
 + a destination data that is being sent (written) to  
 + events of interest are  
   - `error`  
-  - `finish` triggered when an `end()` method is called and all the data has been flusheda  
+  - `finish` triggered when an `end()` method is called and all the data has been flushed  
   - `drain` triggered when an attempt to write data returns `false`  
 
 ### Transform Streams 
@@ -90,7 +90,7 @@ demo as `dir-access.js`
 
 #### Writable Streams  
 + created by `fs.createWriteStream(path[,options])`(demo as `stream/example02.js`)  
-+ Its default options are  
++ its default options are  
 ```javascript
 { 
   flags: 'w', // "r+" would allow both read and write 
@@ -105,13 +105,13 @@ demo as `dir-access.js`
 
 ## Resource Access with `path`   
 ### transform and extract data from filesystem paths  
-+ `path.extname()`: extract the extension (demo as `extname.js`)  
-+ `path.basename()`: get the base name (demo as `basename.js`)   
++ `path.extname()`: extract the extension (demo as `path/extname.js`)  
++ `path.basename()`: get the base name (demo as `path/basename.js`)   
 
 ### an environmentally neutral way of dealing with filesystem paths  
-+ `path.delimeter` property: `:` for unix and `;` for windows (demo as `delimeter.js`)  
++ `path.delimeter` property: `:` for unix and `;` for windows (demo as `path/delimeter.js`)  
 + `path.normalize()`: make a canonical path  
-+ `path.parse()`: parse a filesystem path into its components (demo as `parse.js`)   
++ `path.parse()`: parse a filesystem path into its components (demo as `path/parse.js`)   
 
 ## Creating a Command-Line Utility  
 + environment: linux  
@@ -127,8 +127,8 @@ chmod u+x your-script
 + compression types: `zlib` or `deflate`  
 ### a C/S demo  
 + overview: a client sends a compressed file to uncompress by the server  
-+ server goes as 
-+ client goes as 
++ server goes as `zlib/example05.js`
++ client goes as `zlib/example06.js`
   - The key is to ensure that the proper `Content-Encoding` as `gzip,deflate` is given in the header  
   - `Content-Type` is changed to `application/javascript`  
 
