@@ -7,10 +7,10 @@ const path = require('path');
 
 const base = 'public_html';
 const PORT = 8080;
-http.createServer(function (req, res) {
+http.createServer((req, res) => {
   pathname = path.normalize(base + req.url);
   console.log(pathname);
-  fs.stat(pathname, function (err, stats) {
+  fs.stat(pathname, (err, stats) => {
     if (err) {
       res.writeHead(404);
       res.write('Resource missing 404\n');
@@ -22,12 +22,12 @@ http.createServer(function (req, res) {
       res.setHeader('Content-Type', type);
       // create and pipe readable stream
       let file = fs.createReadStream(pathname);
-      file.on("open", function () {
+      file.on("open", () => {
         // 200 status - found, no errors
         res.statusCode = 200;
         file.pipe(res);
       });
-      file.on("error", function (err) {
+      file.on("error", err => {
         console.log(err);
         res.statusCode = 403;
         res.write('file permission');

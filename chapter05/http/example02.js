@@ -18,22 +18,17 @@ let options = {
   }
 };
 
-let req = http.request(options, function (res) {
+let req = http.request(options, res => {
   console.log('STATUS: ' + res.statusCode);
   console.log('HEADERS: ' + JSON.stringify(res.headers));
+
   res.setEncoding('utf8');
   // get data as chunks
-  res.on('data', function (chunk) {
-    console.log('BODY: ' + chunk);
-  });
+  res.on('data', chunk => console.log('BODY: ' + chunk));
   // end response
-  res.on('end', function () {
-    console.log('No more data in response.')
-  })
+  res.on('end', () => console.log('No more data in response.'));
 });
-req.on('error', function (e) {
-  console.log('problem with request: ' + e.message);
-});
+req.on('error', e => console.log('problem with request: ' + e.message));
 // write data to request body
 req.write(postData);
 req.end();
