@@ -2,7 +2,7 @@
 const fs = require("fs");
 const https = require("https");
 
-const PORT = 3000;
+const PORT = 8080;
 
 let privateKey = fs.readFileSync('site.key').toString();
 let certificate = fs.readFileSync('final.crt').toString();

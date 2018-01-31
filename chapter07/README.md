@@ -4,9 +4,9 @@ Security should be always considered.
 
 ## Servers, Streams, and Sockets  
 ### Sockets and Streams  
-+ A **socket** is an endpoint in a communication   
++ a **socket** is an endpoint in a communication   
 + a **network socket** is an endpoint in a communication between applications running on two different computers on the network   
-+ **stream** is the data flows between the sockets  
++ **stream** is the data flowing between the sockets  
 + stream can be transmitted as **binary data** in a buffer, or in **Unicode** as a string. Both types of data are transmitted as **packets**: parts of the data split off into similar-sized
 pieces   
 + a finish packet (**FIN**) sent by a socket signals that the transmission is done  
@@ -32,7 +32,7 @@ pieces
 ### UDP/Datagram Socket  
 + UDP is a connectionless protocol, which means there's no guarantee of a connection between the two endpoints  
 + Comparing to TCP, UDP is less reliable and robust, but generally faster, making it popular for real-time uses  
-+ `createSocket(options,[,callback])` creates a UDP socket socket, where  
++ `createSocket(options[,callback])` creates a UDP socket socket, where  
   - `type` in `options` is either `udp4` or `udp6` 
   - `callback` listens for events  
 + messages sent using UDP **must be sent as buffers**, not strings  
@@ -66,7 +66,7 @@ as plain text, but passwords can be cracked if an agency or individual has the e
 
 + problem of **rainbow table**  
   - a rainbow table is basically a table of precomputed hash values for every possible combination of characters  
-  - soleved by **salting** (append a unique generated salt to the password before encryption)  
+  - solved by **salting** (append a unique generated salt to the password before encryption)  
   - A better option is to generate a unique salt for each user password and then store it with the password  
 + a demo app goes as `crypto/example{08,09}.js`   
   - The crypto `hash` can be used in a stream (demo as `crypto/hash.js`)   
