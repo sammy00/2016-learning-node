@@ -1,7 +1,9 @@
 "use strict";
 const fs = require('fs');
 
-//fs.open('./data.txt', 'a+', 0666, function (err, fd) {
+// NOT ALLOWED
+// fs.open('./data.txt', 'a+', 0666, function (err, fd) {
+// OK
 fs.open('./data.txt', 'a+', 0o666, function (err, fd) {
   if (err) return console.error(err);
   fs.write(fd, 'First line', 'utf-8', function (err, written, str) {

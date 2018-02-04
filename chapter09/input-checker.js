@@ -1,5 +1,5 @@
 'use strict';
-const util = require('util');
+
 const eventEmitter = require('events').EventEmitter;
 const fs = require('fs');
 class InputChecker extends eventEmitter {
